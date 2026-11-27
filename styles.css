@@ -127,3 +127,5 @@ dialog.view{max-width:520px;max-height:90vh;overflow:auto}
 :root { --text-muted: #64748b; }
 
 :root { --border-subtle: #e2e8f0; }
+
+.badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
