@@ -135,3 +135,5 @@ dialog.view{max-width:520px;max-height:90vh;overflow:auto}
 .badge-cash-out { background-color: #fef3c7; color: #92400e; }
 
 .tx-table { width: 100%; border-collapse: collapse; }
+
+.tx-table th, .tx-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #e2e8f0; text-align: left; }
