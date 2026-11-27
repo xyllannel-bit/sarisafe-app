@@ -121,3 +121,5 @@ dialog.view{max-width:520px;max-height:90vh;overflow:auto}
 #stTabs button.on{background:#007cff;color:#fff;border-color:#007cff}
 
 :root { --accent-primary: #0f766e; }
+
+:root { --surface-card: #ffffff; }
