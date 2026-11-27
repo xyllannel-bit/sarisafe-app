@@ -116,6 +116,17 @@ dialog.view{max-width:520px;max-height:90vh;overflow:auto}
 .rcpt-sig .bigsig{max-height:110px;object-fit:contain;margin-top:4px}
 
 /* Pending queue & Log filter pills */
-.pend-card{border-left:4px solid #f59e0b;background:#fffbeb}
-.pend-badge{background:#f59e0b;color:#fff;margin-left:6px}
-#stTabs button.on{background:#007cff;color:#fff;border-color:#007cff}
+.pend-card {
+  border-left: 4px solid #f59e0b;
+  background: #fffbeb;
+}
+.pend-badge {
+  background: #f59e0b;
+  color: #fff;
+  margin-left: 6px;
+}
+#stTabs button.on {
+  background: #007cff;
+  color: #fff;
+  border-color: #007cff;
+}
