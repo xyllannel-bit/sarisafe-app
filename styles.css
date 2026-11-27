@@ -123,3 +123,5 @@ dialog.view{max-width:520px;max-height:90vh;overflow:auto}
 :root { --accent-primary: #0f766e; }
 
 :root { --surface-card: #ffffff; }
+
+:root { --text-muted: #64748b; }
