@@ -1,12 +1,19 @@
 /* SariSafe styles – GCash-inspired look. Linked from index.html */
-:root{--ink:#1c2b4a;--mut:#667394;--bg:#eef3fb;--card:#fff;--line:#dce4f2;--blue:#007cff;--blue2:#0057d9;--red:#e5383b;--grn:#12a150;--amb:#c77700;--sh:0 4px 16px #0b3a8a14}
+:root{--ink:#1c2b4a;--mut:#667394;
+      --bg:#eef3fb;--card:#fff;
+      --line:#dce4f2;--blue:#007cff;
+      --blue2:#0057d9;--red:#e5383b;--grn:#12a150;--amb:#c77700;--sh:0 4px 16px #0b3a8a14}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;padding-bottom:88px;font:16px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
 header{background:linear-gradient(135deg,#0066ff,#0040c8);color:#fff;padding:18px 16px 56px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+/*header*/
 header h1{font-size:1.3rem;margin:0}header .note{color:#dbe9ff}
-header .btn{background:#fff;color:#0057d9}
 .hbtns{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.hbtns .btn{background:#fff;color:#0057d9;transition:background .15s,color .15s,transform .15s,box-shadow .15s}
+.hbtns .btn:hover{background:#e6f1ff;color:#0040c8;transform:translateY(-1px);box-shadow:0 4px 12px #0003}
+.hbtns .btn:active{transform:translateY(0) scale(.97)}
 .badge{font-size:.75rem;padding:3px 10px;border-radius:99px;background:#fff3;margin-left:8px;font-weight:600}
+
 nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:space-around;background:#fff;border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px #0b3a8a14}
 nav button{flex:1;max-width:110px;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:12px;font:inherit;font-size:.72rem;color:var(--mut);cursor:pointer;transition:color .15s,background .15s}
 nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -38,11 +45,71 @@ input:focus,select:focus,textarea:focus,button:focus-visible,canvas:focus-visibl
 #refInd.dup{background:#fde8e8;color:var(--red);font-weight:700;animation:shake .4s}
 #ref{font-size:1.35rem;letter-spacing:2px;font-variant-numeric:tabular-nums;font-weight:600}
 canvas{width:100%;height:150px;border:2px dashed #b9cdee;border-radius:14px;touch-action:none;background:#fbfdff}
-.seg{display:flex;gap:10px}
-.seg label{position:relative;flex:1;margin:0;border:2px solid var(--line);border-radius:14px;padding:12px;text-align:center;cursor:pointer;color:var(--ink);font-weight:700;transition:.15s}
-.seg label:has(input:checked){border-color:var(--blue);background:#e6f1ff;color:var(--blue)}
-.seg label:has(input:focus-visible){outline:3px solid #007cff44}
-.seg input{position:absolute;opacity:0;width:0;height:0}
+.seg {
+  display: flex;
+  gap: 10px;
+}
+
+.seg label {
+  position: relative;
+  flex: 1;
+  margin: 0;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  transition: background .15s, color .15s, border-color .15s, transform .15s, box-shadow .15s;
+}
+
+/* Hover effect matching .hbtns .btn */
+.seg label:hover {
+  background: #e6f1ff;
+  color: #0040c8;
+  border-color: var(--blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px #0003;
+}
+
+.seg label:active {
+  transform: translateY(0) scale(.97);
+}
+
+/* Selected / Chosen state */
+.seg label:has(input:checked) {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 12px #007cff44;
+}
+
+/* Optional: Distinct Green (Cash In) & Red/Blue (Cash Out) when chosen */
+/* Uncomment below if you want Cash In = Green and Cash Out = Red/Blue instead of both Blue:
+.seg label:first-child:has(input:checked) {
+  border-color: var(--grn);
+  background: var(--grn);
+  color: #fff;
+}
+.seg label:last-child:has(input:checked) {
+  border-color: var(--blue2);
+  background: var(--blue2);
+  color: #fff;
+}
+*/
+
+.seg label:has(input:focus-visible) {
+  outline: 3px solid #007cff44;
+}
+
+.seg input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 table{width:100%;border-collapse:collapse;font-size:.88rem}
 th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
 th{color:var(--mut);font-weight:600}
@@ -82,16 +149,46 @@ dialog.pin{max-width:340px;text-align:center;padding:24px 20px}
 @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition:none!important}}
 
-/* Transaction log + detail view */
-.pill{padding:2px 10px;border-radius:99px;font-size:.78rem;font-weight:600;white-space:nowrap}
-.pill.in{background:#e3f6ec;color:var(--grn)}.pill.out{background:#e6f1ff;color:var(--blue2)}
-dialog.view{max-width:520px;max-height:90vh;overflow:auto}
-.dl{margin:6px 0}.detail h3{margin:14px 0 6px}
-.bigsig{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff}
-#printArea{display:none}
-@media print{body>*:not(#printArea){display:none!important}#printArea{display:block;padding:20px;font-family:Arial,sans-serif;color:#000}}
-.chip{font-size:.78rem;background:#fff3;padding:3px 12px;border-radius:99px;font-weight:600}
+/* ==========================================================================
+   POS TRANSACTION LOG HEADER BANNER
+   ========================================================================== */
+.log-head {
+  background: linear-gradient(135deg, #0066ff, #0040c8);
+  color: #fff;
+  border-radius: 18px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 6px 20px #0057d933;
+  border: 1.5px solid #3b82f6;
+}
 
+.log-head h2 {
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 2px;
+  letter-spacing: .2px;
+}
+
+.log-head .note {
+  color: #dbe9ff;
+  margin: 0;
+  font-weight: 600;
+}
+
+.log-head .chip {
+  background: #fff;
+  color: var(--blue2);
+  font-weight: 800;
+  font-size: .8rem;
+  padding: 5px 14px;
+  box-shadow: 0 2px 8px #0002;
+}
 /* Transaction history grouped by day */
 .day{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:#fff;overflow:hidden}
 .day>summary{cursor:pointer;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:12px 14px;background:#eef5ff;font-weight:700;list-style:none}
@@ -104,16 +201,157 @@ dialog.view{max-width:520px;max-height:90vh;overflow:auto}
 .day .tw{padding:0 8px 8px}
 .ts{white-space:nowrap}
 
-/* Auto-popup transaction receipt */
-.rcpt-head{text-align:center;padding-bottom:12px;margin-bottom:12px;border-bottom:1.5px dashed #cbd5e1}
-.rcpt-ok{display:inline-block;background:#dcfce7;color:#166534;font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:999px}
-.rcpt-body{display:flex;flex-direction:column;gap:8px}
-.rcpt-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.95rem;padding-bottom:6px;border-bottom:1px solid #f1f5f9}
-.rcpt-row span:first-child{color:#64748b}
-.rcpt-row span:last-child{text-align:right}
-.rcpt-sig{margin-top:12px;padding-top:10px;border-top:1.5px dashed #cbd5e1;text-align:center}
-.rcpt-sig .note{display:block;margin-bottom:4px}
-.rcpt-sig .bigsig{max-height:110px;object-fit:contain;margin-top:4px}
+/* ==========================================================================
+   AUTO-POPUP TRANSACTION RECEIPT (BOLD & CRISP BORDERS)
+   ========================================================================== */
+dialog:has(.rcpt-head),
+dialog:has(.rcpt-body) {
+  background: #f4f8ff;
+  border: 2.5px solid #0057d9;
+  border-radius: 22px;
+  padding: 0;
+  max-width: 420px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 40px #0b2a5a44;
+  animation: rcptPop .22s cubic-bezier(.16, 1, .3, 1);
+}
+
+@keyframes rcptPop {
+  from { opacity: 0; transform: translateY(14px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Blue Header Banner */
+.rcpt-head {
+  background: linear-gradient(135deg, #0066ff, #0040c8);
+  color: #fff;
+  text-align: center;
+  padding: 18px 16px 16px;
+  border-bottom: 2.5px dashed #93c5fd;
+}
+
+.rcpt-head h3,
+.rcpt-head h2 {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 8px 0 2px;
+  letter-spacing: .3px;
+}
+
+.rcpt-head .note {
+  color: #dbe9ff;
+  font-weight: 600;
+}
+
+/* "Transaction Saved" Pill */
+.rcpt-ok {
+  display: inline-block;
+  background: #dcfce7;
+  color: #14532d;
+  border: 1.5px solid #22c55e;
+  font-weight: 800;
+  font-size: .82rem;
+  padding: 4px 14px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px #0003;
+}
+
+/* Receipt Details Box */
+.rcpt-body {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin: 14px 14px 0;
+  padding: 6px 14px;
+  border-radius: 14px;
+  border: 2px solid #94b8e8;
+  box-shadow: 0 4px 12px #0b3a8a12;
+}
+
+/* Individual Rows */
+.rcpt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: .92rem;
+  padding: 7px 0;
+  border-bottom: 1.5px solid #cbd5e1;
+}
+
+.rcpt-row:last-child {
+  border-bottom: none;
+}
+
+/* Left Labels */
+.rcpt-row span:first-child {
+  color: #475569;
+  font-weight: 600;
+}
+
+/* Right Values — Bold & Crisp */
+.rcpt-row span:last-child {
+  text-align: right;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Highlight the Total Row (6th row in your screenshot) */
+.rcpt-row:nth-child(6) {
+  background: #eef5ff;
+  margin: 2px -8px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  border-bottom: 1.5px solid #93c5fd;
+}
+
+.rcpt-row:nth-child(6) span:first-child {
+  color: var(--blue2);
+  font-weight: 800;
+}
+
+.rcpt-row:nth-child(6) span:last-child {
+  color: var(--blue2);
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+/* Signature Box */
+.rcpt-sig {
+  margin: 12px 14px 0;
+  padding: 10px 12px;
+  background: #fff;
+  border: 2px dashed #6495ed;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.rcpt-sig .note {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: var(--blue2);
+}
+
+.rcpt-sig .bigsig {
+  max-height: 95px;
+  object-fit: contain;
+  margin-top: 2px;
+  background: #f8fbff;
+  border: 1.5px solid #94b8e8;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+/* Bottom Action Buttons */
+dialog:has(.rcpt-head) .btns,
+dialog:has(.rcpt-body) .btns {
+  padding: 12px 14px 16px;
+  margin-top: 0;
+  justify-content: center;
+}
 
 /* Pending queue & Log filter pills */
 .pend-card{border-left:4px solid #f59e0b;background:#fffbeb}
