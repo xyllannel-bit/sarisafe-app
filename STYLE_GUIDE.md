@@ -86,3 +86,10 @@ SariSafe uses an **Offline-First Modular Monolith** architecture designed for ze
 ## 7. Comments & Documentation Standards
 * **SRS Traceability Headers:** Every major functional section in `index.html` and `styles.css` must include a section banner referencing the corresponding SRS requirement IDs (e.g., `/* ---------- duplicate lookup (FR-001, FR-002, NFR-001) ---------- */`).
 * **Public & Core Function Documentation:** Document complex business logic—such as fee bracket matching (`calcFee`), balance reconciliation (`balances`), JSON backup schema validation (`validTx`, `validShift`), and SQL RLS/RPC functions (`sarisafe_tender_sync`)—with concise comments explaining inputs, side effects, and constraints.
+
+---
+
+## Touch Targets & Store Counter Readability
+* **Minimum Tap Size:** Keep primary action buttons (`Cash-In`, `Cash-Out`, `Confirm`, `Export CSV`) at least `44px` tall so store tenders can tap accurately on mobile screens during busy hours.
+* **High-Contrast Status Badges:** Pair status colors (online/offline, pending/confirmed) with clear text labels so badges remain readable under bright store lighting.
+* **Numeric Clarity:** Display currency amounts (`₱`) and 13-digit GCash reference numbers in clear, high-contrast typography to prevent misreading digits.

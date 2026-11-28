@@ -9,3 +9,8 @@ Thumbs.db
 # never commit exported customer data
 sarisafe-backup-*.json
 sarisafe-transactions-*.csv
+
+# Windows & local editor files
+desktop.ini
+.vscode/
+.idea/

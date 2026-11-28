@@ -380,3 +380,8 @@ on conflict (user_id) do update
   set store_id = excluded.store_id,
       full_name = excluded.full_name,
       role = excluded.role;
+
+      -- 16. POST-SETUP VERIFICATION QUERIES (Optional read-only checks)
+-- Run these individually in the Supabase SQL Editor to verify tables, RLS, and owner setup:
+-- select tablename, rowsecurity from pg_tables where schemaname = 'public' and tablename like 'sarisafe_%';
+-- select store_id, full_name, role from public.sarisafe_profiles where role = 'owner';

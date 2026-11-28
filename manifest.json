@@ -6,6 +6,9 @@
   "display": "standalone",
   "background_color": "#eef3fb",
   "theme_color": "#007cff",
+  "orientation": "portrait-primary",
+  "lang": "en-PH",
+  "categories": ["finance", "business", "productivity"],
   "icons": [
     {
       "src": "icon.svg",

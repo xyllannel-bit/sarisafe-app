@@ -1,7 +1,7 @@
 // SariSafe service worker: caches the app shell so it opens with no internet.
 // Network-first: when online you always get the newest files; the cache is only the offline fallback.
 // Bump CACHE when you change any file.
-const CACHE = "sarisafe-v24";
+const CACHE = "sarisafe-v25";
 const SHELL = ["./", "./index.html", "./styles.css", "./manifest.json", "./icon.svg"];
 
 self.addEventListener("install", e => {

@@ -59,3 +59,10 @@ Reviewers must verify every item below before approving a Pull Request:
 - [ ] **5. Clean Repository Hygiene:** Are `.env` files, real passwords, private keys, and exported customer `.csv`/`.json` files excluded from the commit?
 - [ ] **6. Code Style & Formatting:** Does the code follow `STYLE_GUIDE.md` (`camelCase` JS, `UPPER_SNAKE_CASE` constants, `kebab-case` CSS, 2-space indentation, `"use strict"`)?
 - [ ] **7. Service Worker Cache Bump:** If `index.html`, `styles.css`, `manifest.json`, or `icon.svg` changed, was `CACHE` incremented in `sw.js`?
+
+---
+
+## Local Testing & Offline Verification
+* **IndexedDB Check:** Before opening a Pull Request, verify that Cash-In and Cash-Out entries persist after refreshing the browser while offline.
+* **Duplicate Reference Guard:** Test entering an existing GCash reference number to confirm the warning modal blocks duplicate logging.
+* **Branch Hygiene:** Keep each Pull Request focused on a single feature, style refinement, or documentation update with descriptive commit messages.
